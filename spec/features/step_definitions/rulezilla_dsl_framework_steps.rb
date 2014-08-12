@@ -37,13 +37,11 @@ end
 step 'the result is :result' do |result|
   @record ||= {}
   expect(@rule_klass.apply(@record)).to eq result
-  step 'clear dummy classes'
 end
 
 step 'all the outcomes are :outcomes' do |outcomes|
   outcomes = outcomes.split(',').map{|s| s.strip}
   expect(@rule_klass.results).to match_array outcomes
-  step 'clear dummy classes'
 end
 
 step ':does_or_does_not not raise the exception :exception' do |does_or_does_not, exception|
@@ -54,11 +52,4 @@ step ':does_or_does_not not raise the exception :exception' do |does_or_does_not
   else
     expect{ @rule_klass.apply @record }.not_to raise_error
   end
-  step 'clear dummy classes'
-end
-
-step 'clear dummy classes' do
-  Object.send(:remove_const, (@rule_klass_name || 'DummyRule').to_sym) rescue NameError
-  Object.send(:remove_const, "#{(@rule_klass_name || 'DummyRule')}Record".to_sym) rescue NameError
-  Object.send(:remove_const, "#{(@support_name || 'DummyRule')}Support".to_sym) rescue NameError
 end
