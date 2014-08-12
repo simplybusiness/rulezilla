@@ -30,21 +30,14 @@ module Rulezilla
     end
 
     def all_results(record, node=@root_node, results=[])
-      node.children.each do |child_node|
-        evaluator = NodeEvaluator.new(record, child_node)
-        if child_node.has_children?
-          results += all_results(record, child_node, results)
-          if evaluator.has_result?
-            results << evaluator.result rescue NoMethodError
-          end
-        else
-          results << evaluator.result rescue NoMethodError
-        end
-      end
-
       evaluator = NodeEvaluator.new(record, node)
+
       if evaluator.has_result?
         results << evaluator.result rescue NoMethodError
+      end
+
+      node.children.each do |child_node|
+        results += all_results(record, child_node, results)
       end
 
       return results
