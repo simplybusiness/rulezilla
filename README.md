@@ -7,12 +7,12 @@ This is a Rule DSL extract from Call Me Maybe
 # Installation
 
 	gem 'rulezilla', git: 'git@github.com:simplybusiness/rulezilla.git'
-	
 
 # Rules
 
 Please refer to the feature for more details:
 [DSL Feature](spec/features/rulezilla_dsl_framwork.feature)
+[Default Support Methods Feature](spec/features/default_support_methods.feature)
 
 
 Here is the syntax for a rule:
