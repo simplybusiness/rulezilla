@@ -17,7 +17,7 @@ module Rulezilla
         if node.has_children?
           node.children.each do |child_node|
             value = find(record, child_node)
-            return value if value
+            return value unless value.nil?
           end
         end
         return evaluator.result
