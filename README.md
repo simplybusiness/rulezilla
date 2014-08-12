@@ -1,7 +1,7 @@
 rulezilla
 =========
 
-This is the Rule DSL extract from Call Me Maybe
+This provide a DSL to implement rules for various tasks. In the current version we are still rely user to have a certain level of Ruby knowledge to be able to use this DSL. The ultimate goal is for people without prior Ruby knowledge can change and even write the Rule.
 
 
 # Installation
