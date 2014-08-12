@@ -64,8 +64,8 @@ module Rulezilla
       end
 
       def missing_attributes(record)
-        record = record.attributes unless record.is_a? Hash
-        mandatory_attributes.reject{ |field| record.keys.map(&:to_sym).include? field }
+        record = OpenStruct.new(record) if record.is_a?(Hash)
+        mandatory_attributes.map(&:to_sym) - record.methods
       end
 
       def validate_missing_attributes(record)
