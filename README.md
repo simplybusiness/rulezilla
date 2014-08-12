@@ -1,7 +1,7 @@
 rulezilla
 =========
 
-This is a Rule DSL extract from Call Me Maybe
+This is the Rule DSL extract from Call Me Maybe
 
 
 # Installation
@@ -11,7 +11,7 @@ This is a Rule DSL extract from Call Me Maybe
 # Rules
 
 Please refer to the feature for more details:
-[DSL Feature](spec/features/rulezilla_dsl_framwork.feature)
+[DSL Feature](spec/features/rulezilla_dsl_framwork.feature),
 [Default Support Methods Feature](spec/features/default_support_methods.feature)
 
 
