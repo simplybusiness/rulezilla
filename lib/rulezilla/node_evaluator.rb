@@ -8,6 +8,7 @@ module Rulezilla
     end
 
     def applies?
+      return true if node.condition.nil?
       record.instance_eval(&node.condition)
     end
 
