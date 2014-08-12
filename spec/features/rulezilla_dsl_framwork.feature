@@ -170,3 +170,20 @@ Scenario: Support Class
     """
   When the record has attribute "fruit" and returns "true"
   Then the result is "This is good!"
+
+
+Scenario Outline: Validate the presence of attributes
+  Given the rule is:
+    """
+      validate_attributes_presence :apple, :orange
+
+      default(true)
+    """
+  When the record has attribute "<attributes>"
+  Then "<does or does not>" not raise the exception "<exception>"
+
+  Examples:
+  | attributes    | does or does not | exception                 |
+  | apple         | does             | Missing orange attributes |
+  | orange        | does             | Missing apple attributes  |
+  | apple, orange | does not         |                           |

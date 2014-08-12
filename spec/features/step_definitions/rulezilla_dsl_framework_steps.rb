@@ -26,6 +26,14 @@ step 'the record has attribute :method and returns :value' do |method, value|
   @record = {method => value}
 end
 
+step 'the record has attribute :attributes' do |attributes|
+  attributes = attributes.split(',').map{|s| s.strip}
+  @record = {}
+  attributes.each do |key|
+    @record[key] = true
+  end
+end
+
 step 'the result is :result' do |result|
   @record ||= {}
   expect(@rule_klass.apply(@record)).to eq result
@@ -38,9 +46,19 @@ step 'all the outcomes are :outcomes' do |outcomes|
   step 'clear dummy classes'
 end
 
+step ':does_or_does_not not raise the exception :exception' do |does_or_does_not, exception|
+  if does_or_does_not == 'does'
+    expect{ @rule_klass.apply @record }.to raise_error do |exception|
+      expect(exception.message).to match /#{exception}/
+    end
+  else
+    expect{ @rule_klass.apply @record }.not_to raise_error
+  end
+  step 'clear dummy classes'
+end
+
 step 'clear dummy classes' do
   Object.send(:remove_const, (@rule_klass_name || 'DummyRule').to_sym) rescue NameError
   Object.send(:remove_const, "#{(@rule_klass_name || 'DummyRule')}Record".to_sym) rescue NameError
   Object.send(:remove_const, "#{(@support_name || 'DummyRule')}Support".to_sym) rescue NameError
 end
-
