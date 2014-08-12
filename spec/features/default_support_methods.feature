@@ -3,18 +3,19 @@ Feature: Default Support methods
 Scenario Outline: does_not?
   Given the rule is:
     """
-      define :fruit do
-        condition { does_not?(fruit) }
-        result('Not fruit')
+      define :not_sleep do
+        condition { does_not?(go_to_bed) }
+        result('Tired')
       end
 
-      default('Is fruit')
+      default('Refreshing')
     """
-  When the record has attribute "fruit" and returns "<value>"
+  When the record has attribute "go_to_bed" and returns "<value>"
   Then the result is "<result>"
 
   Examples:
-    | value | result    |
-    | true  | Is fruit  |
-    | false | Not fruit |
-    |       | Is fruit  |
+    | value | result     |
+    | true  | Refreshing |
+    | false | Tired      |
+    |       | Refreshing |
+    | nil   | Refreshing |

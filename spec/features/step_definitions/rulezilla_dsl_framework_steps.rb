@@ -20,6 +20,8 @@ step 'the record has attribute :method and returns :value' do |method, value|
       true
     when 'false'
       false
+    when 'nil'
+      nil
     else
       value
     end
