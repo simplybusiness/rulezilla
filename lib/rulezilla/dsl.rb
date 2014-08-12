@@ -59,8 +59,8 @@ module Rulezilla
         @tree ||= Tree.new(Node.new())
       end
 
-      def validate_attributes_presence(*fields)
-        @mandatory_attributes = mandatory_attributes | fields
+      def record_klass_instance(record)
+        Object.const_get("#{self.name}Record").new(record)
       end
 
       def missing_attributes(record)
@@ -70,6 +70,11 @@ module Rulezilla
 
       def validate_missing_attributes(record)
         raise "Missing #{missing_attributes(record).join(', ')} attributes from: #{record}" unless missing_attributes(record).empty?
+      end
+
+      # DSL methods
+      def validate_attributes_presence(*fields)
+        @mandatory_attributes = mandatory_attributes | fields
       end
 
       def define(name=nil, &block)
@@ -89,9 +94,7 @@ module Rulezilla
       end
       alias_method :default, :result
 
-      def record_klass_instance(record)
-        Object.const_get("#{self.name}Record").new(record)
-      end
+      # End of DSL methods
     end
   end
 end
