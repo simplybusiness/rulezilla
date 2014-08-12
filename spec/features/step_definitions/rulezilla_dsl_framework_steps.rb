@@ -36,6 +36,9 @@ end
 
 step 'the result is :result' do |result|
   @record ||= {}
+
+  result = result == 'nil' ? nil : result
+
   expect(@rule_klass.apply(@record)).to eq result
 end
 

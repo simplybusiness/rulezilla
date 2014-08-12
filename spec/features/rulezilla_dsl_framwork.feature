@@ -187,3 +187,10 @@ Scenario Outline: Validate the presence of attributes
   | apple         | does             | Missing orange attributes |
   | orange        | does             | Missing apple attributes  |
   | apple, orange | does not         |                           |
+
+
+Scenario: Rule return nil if no rule is defined Given the rule is:
+  Given the rule is:
+    """
+    """
+  Then the result is "nil"
