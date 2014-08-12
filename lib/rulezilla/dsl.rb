@@ -5,13 +5,22 @@ module Rulezilla
       create_klass(base)
     end
 
+    def self.get_super(klass)
+      Object.const_get (['Object'] + klass.name.split('::'))[0..-2].join('::')
+    end
+
+    def self.demodulize_klass_name(klass_name)
+      klass_name.split('::').last
+    end
+
     def self.create_klass(parent_klass)
       klass_name = parent_klass.name
-      klass = parent_klass.parent.const_set("#{klass_name.demodulize}Record", Class.new)
+
+      klass = get_super(parent_klass).const_set("#{demodulize_klass_name(klass_name)}Record", Class.new)
 
       klass.class_eval do
-        include Rules::BasicSupport
-        include "#{klass_name}Support".constantize rescue NameError
+        include Rulezilla::BasicSupport
+        include Object.const_get("#{klass_name}Support") rescue NameError
 
         attr_reader :record
 
@@ -24,6 +33,9 @@ module Rulezilla
           record.send(meth, *args, &block)
         end
       end
+
+      private_class_method :get_super
+      private_class_method :demodulize_klass_name
     end
 
     module ClassMethods
@@ -78,7 +90,7 @@ module Rulezilla
       alias_method :default, :result
 
       def record_klass_instance(record)
-        "#{self.name}Record".constantize.new(record)
+        Object.const_get("#{self.name}Record").new(record)
       end
     end
   end

@@ -38,8 +38,13 @@ module Rulezilla
             results << evaluator.result rescue NoMethodError
           end
         else
-          results << evaluator.result
+          results << evaluator.result rescue NoMethodError
         end
+      end
+
+      evaluator = NodeEvaluator.new(record, node)
+      if evaluator.has_result?
+        results << evaluator.result rescue NoMethodError
       end
 
       return results
