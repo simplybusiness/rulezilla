@@ -3,18 +3,23 @@ rulezilla
 
 This is a Rule DSL extract from Call Me Maybe
 
-Please refer to the feature for more details:
-[DSL Feature](spec/features/rulezilla_dsl_framwork.feature)
+
+# Installation
+
+	gem 'rulezilla', git: 'git@github.com:simplybusiness/rulezilla.git'
+	
 
 # Rules
 
-We have our own rule DSL that is used to define business rules. Rules are used for various tasks, such as attributing a campaign to a lead, assigning a priority to a lead or even validating a phone number.
+Please refer to the feature for more details:
+[DSL Feature](spec/features/rulezilla_dsl_framwork.feature)
+
 
 Here is the syntax for a rule:
 
 ```ruby
 class SomeRule
-  include Rules::DSL
+  include Rulezilla::DSL
 
   group :group_1 do
     condition do
@@ -60,7 +65,7 @@ There is a method to return all possible results for a rule, regardless of wheth
 SomeRule.results # => returns all the results defined in the rule
 ```
 
-## Grouping
+## Nesting
 
 Grouping provies the ability to group conditions and build a hierarchy of rules.
 
@@ -69,7 +74,7 @@ This will return `foo` because both the condition for `rule_1` and the condition
 
 ```ruby
 class RULE1
-  include Rules::DSL
+  include Rulezilla::DSL
   group 'group_1' do
     condition { true }
 
@@ -89,7 +94,7 @@ This will return `bar` because the condition for `group_1` matches, but the cond
 
 ```ruby
 class RULE2
-  include Rules::DSL
+  include Rulezilla::DSL
   group 'group_1' do
     condition { true }
 
@@ -111,7 +116,7 @@ This will return `boop` because `group_1` does not match, but `rule_2` does:
 
 ```ruby
 class RULE3
-  include Rules::DSL
+  include Rulezilla::DSL
   group 'group_1' do
     condition { false }
 
@@ -150,7 +155,7 @@ For example:
 
     # app/rules/foobar_rule.rb
     class FoobarRule
-      include Rules::DSL
+      include Rulezilla::DSL
 
       default { apple }
     end
