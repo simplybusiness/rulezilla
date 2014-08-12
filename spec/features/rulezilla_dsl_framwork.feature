@@ -148,7 +148,7 @@ Scenario Outline: It evaluate the rule against a record
     | false | Oh, too bad   |
 
 
-Scenario: Support Class
+Scenario: Support Module
   Given the rule class name is "FruitRule"
   And the support module called "FruitRuleSupport" has definition:
     """
