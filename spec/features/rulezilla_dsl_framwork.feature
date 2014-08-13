@@ -183,10 +183,10 @@ Scenario Outline: Validate the presence of attributes
   Then "<does or does not>" not raise the exception "<exception>"
 
   Examples:
-  | attributes    | does or does not | exception                 |
-  | apple         | does             | Missing orange attributes |
-  | orange        | does             | Missing apple attributes  |
-  | apple, orange | does not         |                           |
+    | attributes    | does or does not | exception                 |
+    | apple         | does             | Missing orange attributes |
+    | orange        | does             | Missing apple attributes  |
+    | apple, orange | does not         |                           |
 
 
 Scenario: Rule return nil if no rule is defined Given the rule is:
