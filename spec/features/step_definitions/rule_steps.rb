@@ -31,4 +31,14 @@ steps_for :rule_steps do
     end
   end
 
+  step 'this is not a invalid telephone number' do
+    @records.each do |record|
+      expect(Rulezilla::InvalidNumberRule.apply(record)).to eq false
+    end
+  end
+
+  step 'none of the above' do
+    @records = [{telephone_number: '09827364755'}]
+  end
+
 end

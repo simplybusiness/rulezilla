@@ -1,5 +1,7 @@
 module Rulezilla
   class RuleBuilder
+    class DefaultCondition; end
+
     class GherkinToConditionRule
       include Rulezilla::DSL
 
@@ -25,6 +27,11 @@ module Rulezilla
 
           "[#{values}].include?(#{field})"
         end
+      end
+
+      define :'none of the above' do
+        condition { name == 'none of the above' }
+        result(DefaultCondition)
       end
 
       default { raise "Condition steps is not recognised: #{name}" }

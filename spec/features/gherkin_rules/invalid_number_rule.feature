@@ -15,6 +15,6 @@ Feature: InvalidNumberRule
       | 01234567890 |
     Then this is a invalid telephone number
 
-  # Scenario: default
-  #   Given non of the above
-  #   Then this is a valid telephone number
+  Scenario: default
+    Given none of the above
+    Then this is not a invalid telephone number

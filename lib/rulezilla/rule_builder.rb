@@ -19,9 +19,11 @@ module Rulezilla
       klass_definition = rules.map do |rule|
         rule = RuleDefinition.new(rule)
 
+        condition_definition = rule.conditions.empty? ? "" : "condition { #{rule.conditions} }"
+
         """
           define \"#{rule.name}\" do
-            condition { #{rule.conditions} }
+            #{condition_definition}
             result(#{rule.result})
           end
         """
@@ -69,7 +71,7 @@ module Rulezilla
         condition_steps = steps.reject{|step| step['keyword'].strip.downcase == 'then'}
         conditions = condition_steps.map do |step|
           ::Rulezilla::RuleBuilder::GherkinToConditionRule.apply(step)
-        end.join(' && ')
+        end.reject{|condition| condition == Rulezilla::RuleBuilder::DefaultCondition}.join(' && ')
       end
 
       def result
