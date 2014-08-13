@@ -9,6 +9,5 @@ Gem::Specification.new do |gem|
   gem.name          = 'rulezilla'
   gem.require_paths = ['lib']
   gem.version       = "0.0.3"
-  gem.executables   = 'rulezilla'
   gem.license       = 'MIT'
 end
