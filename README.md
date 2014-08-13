@@ -22,7 +22,7 @@ First set the path of which rulezilla can load the feature files from:
 
 The filename will then converted to the name of the class, e.g. `invalid_number_rule.feature` will generate `Rulezilla::InvalidNumberRule` class
 
-We currently only support a very limited steps, please refer to [Invalid telephone number rule feature](spec/features/gherkin_rules/invalid_telephone_number_rule.feature)
+We currently only support a very limited steps, please refer to [Animal feature](spec/features/gherkin_rules/animal_rule.feature)
 
 
 #### Ruby

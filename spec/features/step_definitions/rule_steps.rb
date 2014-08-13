@@ -25,15 +25,15 @@ steps_for :rule_steps do
    end
   end
 
-  step 'this is a invalid telephone number' do
+  step 'this is an animal' do
     @records.each do |record|
-      expect(Rulezilla::InvalidTelephoneNumberRule.apply(record)).to eq true
+      expect(Rulezilla::AnimalRule.apply(record)).to eq true
     end
   end
 
-  step 'this is not a invalid telephone number' do
+  step 'this is not an animal' do
     @records.each do |record|
-      expect(Rulezilla::InvalidTelephoneNumberRule.apply(record)).to eq false
+      expect(Rulezilla::AnimalRule.apply(record)).to eq false
     end
   end
 
