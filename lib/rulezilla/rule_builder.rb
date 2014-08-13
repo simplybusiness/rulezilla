@@ -2,6 +2,8 @@ require 'gherkin/parser/parser'
 require 'gherkin/formatter/json_formatter'
 require 'stringio'
 require 'json'
+require 'rulezilla/rule_builder/gherkin_to_result_rule'
+require 'rulezilla/rule_builder/gherkin_to_condition_rule'
 
 module Rulezilla
   class RuleBuilder
@@ -66,24 +68,12 @@ module Rulezilla
       def conditions
         condition_steps = steps.reject{|step| step['keyword'].strip.downcase == 'then'}
         conditions = condition_steps.map do |step|
-          "telephone_number == ''"
+          ::Rulezilla::RuleBuilder::GherkinToConditionRule.apply(step)
         end.join(' && ')
       end
 
       def result
-        evaluate_result(steps.detect{|step| step['keyword'].strip.downcase == 'then'}['name'])
-      end
-
-      def evaluate_result(step_name)
-        case step_name
-        when /^this is a/i
-          true
-        when /^this is not a/i
-          false
-        else
-          "\"#{step_name}\""
-        end
-
+        ::Rulezilla::RuleBuilder::GherkinToResultRule.apply steps.detect{|step| step['keyword'].strip.downcase == 'then'}
       end
 
       def steps
