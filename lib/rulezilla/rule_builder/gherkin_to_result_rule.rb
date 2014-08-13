@@ -14,7 +14,7 @@ module Rulezilla
           when /hour/
             3600
           when /minute/
-            1800
+            60
           when /second/
             1
           end

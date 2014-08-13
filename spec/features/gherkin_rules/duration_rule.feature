@@ -5,7 +5,7 @@ Feature: Duration Rule
     When the "number of seconds" is "60"
     Then the duration is "1" minute
 
-  Scenario: 60 seconds
+  Scenario: 600 minute
     When the "number of minutes" is "600"
     Then the duration is "10" hours
 

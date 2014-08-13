@@ -54,7 +54,7 @@ steps_for :rule_steps do
   end
 
   step 'the duration is :minute minute' do |minute|
-    send 'the duration is :second seconds', minute.to_i * 1800
+    send 'the duration is :second seconds', minute.to_i * 60
   end
 
   step 'the duration is :second seconds' do |second|
