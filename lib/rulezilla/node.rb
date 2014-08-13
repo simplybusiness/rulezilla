@@ -29,7 +29,7 @@ module Rulezilla
     end
 
     def name=(value)
-      @name = value.to_sym
+      @name = value.try(:to_sym)
     end
 
     def result=(block)
