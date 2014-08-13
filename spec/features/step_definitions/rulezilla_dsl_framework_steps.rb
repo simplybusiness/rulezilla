@@ -62,5 +62,5 @@ end
 
 step 'the trace is :trace' do |trace|
   trace = trace.split('->').map(&:strip)
-  expect(@rule_klass.trace(@record).map(&:name).map(&:to_s)).to eq trace
+  expect(@rule_klass.trace(@record).map(&:name)).to eq trace
 end
