@@ -1,7 +1,7 @@
 module Rulezilla
   class Node
     attr_accessor :parent, :children
-    attr_reader   :condition, :result, :default, :name
+    attr_reader   :condition, :default, :name
 
     def initialize
       @children = []
@@ -9,6 +9,19 @@ module Rulezilla
 
     def has_children?
       children.any?
+    end
+
+    def has_result?
+      !@result.nil?
+    end
+
+    def applies?(record)
+      return true if condition.nil?
+      record.instance_eval(&condition)
+    end
+
+    def result(record)
+      @result.is_a?(Proc) ? record.instance_eval(&result) : @result
     end
 
     def condition=(block)
