@@ -10,4 +10,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.version       = "0.0.3"
   gem.license       = 'MIT'
+
+  gem.add_development_dependency('gherkin')
 end
