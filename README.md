@@ -63,7 +63,7 @@ if the entity is:
 
 #### To get the trace of all node
 
-    RoboticsRule.apply(entity)
+    RoboticsRule.trace(entity)
     #=> all the nodes instance: [root, may_not_injure_human, obey_human, protect_its_own_existence] in sequence order.
 
 
