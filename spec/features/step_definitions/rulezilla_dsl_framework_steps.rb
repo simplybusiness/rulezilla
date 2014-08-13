@@ -59,3 +59,8 @@ step ':does_or_does_not not raise the exception :exception' do |does_or_does_not
     expect{ @rule_klass.apply @record }.not_to raise_error
   end
 end
+
+step 'the trace is :trace' do |trace|
+  trace = trace.split('->').map(&:strip)
+  expect(@rule_klass.trace(@record).map(&:name).map(&:to_s)).to eq trace
+end

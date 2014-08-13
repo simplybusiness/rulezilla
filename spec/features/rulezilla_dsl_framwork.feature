@@ -194,3 +194,48 @@ Scenario: Rule return nil if no rule is defined Given the rule is:
     """
     """
   Then the result is "nil"
+
+Scenario Outline: Trace the path to the result
+  Given the rule is:
+    """
+      group :group_1 do
+        condition { group_1_condition }
+
+        group :group_2 do
+          condition { group_2_condition }
+
+          define :rule_1 do
+            condition { false }
+            result('A')
+          end
+
+          define :rule_2 do
+            condition { rule_2_condition }
+            result('B')
+          end
+
+          default('C')
+        end
+
+        default('D')
+      end
+
+      define :rule_3 do
+        condition { rule_3_condition }
+        result('E')
+      end
+
+      default('F')
+    """
+  When the record has attribute "group_1_condition" and returns "<group_1_condition>"
+  And the record has attribute "group_2_condition" and returns "<group_2_condition>"
+  And the record has attribute "rule_2_condition" and returns "<rule_2_condition>"
+  And the record has attribute "rule_3_condition" and returns "<rule_3_condition>"
+  Then the trace is "<trace>"
+
+  Examples:
+    | group_1_condition | group_2_condition | rule_2_condition | rule_3_condition | trace                                |
+    | true              | true              | true             | true             | root -> group_1 -> group_2 -> rule_2 |
+    | true              | false             | true             | true             | root -> group_1                      |
+    | false             | true              | true             | true             | root -> rule_3                       |
+    | false             | true              | true             | false            | root                                 |

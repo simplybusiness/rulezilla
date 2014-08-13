@@ -44,13 +44,19 @@ module Rulezilla
       end
 
       def apply(record={})
-        validate_missing_attributes(record)
+        result_node = trace(record).last
 
-        tree.find(record_klass_instance(record))
+        result_node.nil? ? nil : result_node.result(record_klass_instance(record))
       end
 
       def results(record=nil)
         tree.all_results(record_klass_instance(record)).uniq
+      end
+
+      def trace(record=nil)
+        validate_missing_attributes(record)
+
+        tree.trace(record_klass_instance(record))
       end
 
       private
