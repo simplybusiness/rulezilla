@@ -15,6 +15,7 @@ step 'the support module called :support_klass_name has definition:' do |support
 end
 
 step 'the record has attribute :method and returns :value' do |method, value|
+  @record ||= {}
   value = case value
     when 'true'
       true
@@ -25,12 +26,12 @@ step 'the record has attribute :method and returns :value' do |method, value|
     else
       value
     end
-  @record = {method => value}
+  @record[method] = value
 end
 
 step 'the record has attribute :attributes' do |attributes|
-  attributes = attributes.split(',').map{|s| s.strip}
-  @record = {}
+  @record ||= {}
+  attributes = attributes.split(',').map(&:strip)
   attributes.each do |key|
     @record[key] = true
   end
@@ -45,7 +46,7 @@ step 'the result is :result' do |result|
 end
 
 step 'all the outcomes are :outcomes' do |outcomes|
-  outcomes = outcomes.split(',').map{|s| s.strip}
+  outcomes = outcomes.split(',').map(&:strip)
   expect(@rule_klass.results).to match_array outcomes
 end
 
@@ -57,4 +58,9 @@ step ':does_or_does_not not raise the exception :exception' do |does_or_does_not
   else
     expect{ @rule_klass.apply @record }.not_to raise_error
   end
+end
+
+step 'the trace is :trace' do |trace|
+  trace = trace.split('->').map(&:strip)
+  expect(@rule_klass.trace(@record).map(&:name).map(&:to_s)).to eq trace
 end

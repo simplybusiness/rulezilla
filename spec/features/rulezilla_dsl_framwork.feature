@@ -2,39 +2,39 @@ Feature: Rulezilla DSL
 
 Scenario: To get all outcome from a rule
   Given the rule is:
-  """
-    group :group_1 do
-      condition { false }
+    """
+      group :group_1 do
+        condition { false }
 
-      group :group_1_1 do
-        condition { true }
+        group :group_1_1 do
+          condition { true }
 
-        define :rule_1_1_1 do
-          condition { false }
-          result('A')
+          define :rule_1_1_1 do
+            condition { false }
+            result('A')
+          end
+
+          default('B')
         end
 
-        default('B')
+        define :rule_1_1 do
+          condition { true }
+          result('C')
+        end
+
+        define :rule_1_2 do
+          condition { true }
+          result('D')
+        end
       end
 
-      define :rule_1_1 do
-        condition { true }
-        result('C')
+      define :rule_2 do
+        condition { false }
+        result('E')
       end
 
-      define :rule_1_2 do
-        condition { true }
-        result('D')
-      end
-    end
-
-    define :rule_2 do
-      condition { false }
-      result('E')
-    end
-
-    default('F')
-  """
+      default('F')
+    """
   Then all the outcomes are "A, B, C, D, E, F"
 
 Scenario: Rule is evaluated from top to bottom order
@@ -183,10 +183,10 @@ Scenario Outline: Validate the presence of attributes
   Then "<does or does not>" not raise the exception "<exception>"
 
   Examples:
-  | attributes    | does or does not | exception                 |
-  | apple         | does             | Missing orange attributes |
-  | orange        | does             | Missing apple attributes  |
-  | apple, orange | does not         |                           |
+    | attributes    | does or does not | exception                 |
+    | apple         | does             | Missing orange attributes |
+    | orange        | does             | Missing apple attributes  |
+    | apple, orange | does not         |                           |
 
 
 Scenario: Rule return nil if no rule is defined Given the rule is:
@@ -194,3 +194,48 @@ Scenario: Rule return nil if no rule is defined Given the rule is:
     """
     """
   Then the result is "nil"
+
+Scenario Outline: Trace the path to the result
+  Given the rule is:
+    """
+      group :group_1 do
+        condition { group_1_condition }
+
+        group :group_2 do
+          condition { group_2_condition }
+
+          define :rule_1 do
+            condition { false }
+            result('A')
+          end
+
+          define :rule_2 do
+            condition { rule_2_condition }
+            result('B')
+          end
+
+          default('C')
+        end
+
+        default('D')
+      end
+
+      define :rule_3 do
+        condition { rule_3_condition }
+        result('E')
+      end
+
+      default('F')
+    """
+  When the record has attribute "group_1_condition" and returns "<group_1_condition>"
+  And the record has attribute "group_2_condition" and returns "<group_2_condition>"
+  And the record has attribute "rule_2_condition" and returns "<rule_2_condition>"
+  And the record has attribute "rule_3_condition" and returns "<rule_3_condition>"
+  Then the trace is "<trace>"
+
+  Examples:
+    | group_1_condition | group_2_condition | rule_2_condition | rule_3_condition | trace                                |
+    | true              | true              | true             | true             | root -> group_1 -> group_2 -> rule_2 |
+    | true              | false             | true             | true             | root -> group_1                      |
+    | false             | true              | true             | true             | root -> rule_3                       |
+    | false             | true              | true             | false            | root                                 |

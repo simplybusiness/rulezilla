@@ -3,24 +3,26 @@ module Rulezilla
     attr_reader :current_node, :root_node
 
     def initialize(node)
-      @root_node    = node
-      @current_node = node
+      @root_node      = node
+      @root_node.name = :root
+      @current_node   = node
     end
 
     def go_up
       @current_node = is_root? ? @root_node : @current_node.parent
     end
 
-    def find(record, node=@root_node)
+    def trace(record, node=@root_node)
       if node.applies?(record)
         if node.has_children?
           node.children.each do |child_node|
-            value = find(record, child_node)
-            return value unless value.nil?
+            array = trace(record, child_node)
+            return [node] + array unless array.empty?
           end
         end
-        return node.result(record)
+        return node.has_result? ? [node] : []
       end
+      return []
     end
 
     def all_results(record, node=@root_node, results=[])
