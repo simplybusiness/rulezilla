@@ -21,7 +21,7 @@ module Rulezilla
     end
 
     def result(record)
-      @result.is_a?(Proc) ? record.instance_eval(&result) : @result
+      @result.is_a?(Proc) ? record.instance_eval(&@result) : @result
     end
 
     def condition=(block)
