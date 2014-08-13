@@ -41,4 +41,20 @@ steps_for :rule_steps do
     @records = [{telephone_number: '09827364755'}]
   end
 
+  step 'the duration is :day days' do |day|
+    send 'the duration is :second seconds', day.to_i * 86400
+  end
+
+  step 'the duration is :hour hours' do |hour|
+    send 'the duration is :second seconds', hour.to_i * 3600
+  end
+
+  step 'the duration is :minute minute' do |minute|
+    send 'the duration is :second seconds', minute.to_i * 1800
+  end
+
+  step 'the duration is :second seconds' do |second|
+    expect(Rulezilla::DurationRule.apply(@records.first)).to eq second.to_i
+  end
+
 end
