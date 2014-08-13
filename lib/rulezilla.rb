@@ -5,16 +5,11 @@ require 'rulezilla/dsl'
 require 'rulezilla/rule_builder'
 
 module Rulezilla
+  extend self
 
-  def self.set_gherkin_rules_path(path)
-    @gherkin_rules_path = path
-  end
+  attr_accessor :gherkin_rules_path
 
-  def self.gherkin_rules_path
-    @gherkin_rules_path
-  end
-
-  def self.const_missing(name)
+  def const_missing(name)
     raise 'Missing Gherkin Rule Path' if gherkin_rules_path.nil?
 
     matching_file = Dir.glob(File.join(gherkin_rules_path, '**', '*')).detect do |file|
@@ -28,12 +23,13 @@ module Rulezilla
     end
   end
 
-  def self.underscore(camel_string)
+  private
+  def underscore(camel_string)
     camel_string.gsub(/::/, '/').
     gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
     gsub(/([a-z\d])([A-Z])/,'\1_\2').
     tr("-", "_").
     downcase
   end
-  private_class_method :underscore
+
 end

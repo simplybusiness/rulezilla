@@ -3,7 +3,7 @@ require 'pry'
 
 Dir.glob("spec/features/step_definitions/**/*steps.rb") { |f| load f, true }
 
-Rulezilla.set_gherkin_rules_path File.join(Dir.pwd, 'spec/features/gherkin_rules')
+Rulezilla.gherkin_rules_path = File.join(Dir.pwd, 'spec/features/gherkin_rules')
 
 RSpec.configure do |config|
   config.after(:each) do
