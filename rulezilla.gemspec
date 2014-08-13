@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.name          = 'rulezilla'
   gem.require_paths = ['lib']
-  gem.version       = "0.0.1"
+  gem.version       = "0.0.2"
   gem.executables   = 'rulezilla'
   gem.license       = 'MIT'
 end
