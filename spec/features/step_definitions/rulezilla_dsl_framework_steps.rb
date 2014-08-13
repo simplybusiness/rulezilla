@@ -29,7 +29,7 @@ step 'the record has attribute :method and returns :value' do |method, value|
 end
 
 step 'the record has attribute :attributes' do |attributes|
-  attributes = attributes.split(',').map{|s| s.strip}
+  attributes = attributes.split(',').map(&:strip)
   @record = {}
   attributes.each do |key|
     @record[key] = true
@@ -45,7 +45,7 @@ step 'the result is :result' do |result|
 end
 
 step 'all the outcomes are :outcomes' do |outcomes|
-  outcomes = outcomes.split(',').map{|s| s.strip}
+  outcomes = outcomes.split(',').map(&:strip)
   expect(@rule_klass.results).to match_array outcomes
 end
 
