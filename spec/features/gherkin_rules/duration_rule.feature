@@ -1,5 +1,5 @@
 @rule_steps
-Feature: DurationRule
+Feature: Duration Rule
 
   Scenario: 60 seconds
     When the "number of seconds" is "60"

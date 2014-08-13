@@ -1,5 +1,5 @@
 @rule_steps
-Feature: AnimalRule
+Feature: Animal Rule
 
   Scenario: entity is a cat
     When this is a "cat"
