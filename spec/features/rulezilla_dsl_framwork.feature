@@ -2,39 +2,39 @@ Feature: Rulezilla DSL
 
 Scenario: To get all outcome from a rule
   Given the rule is:
-  """
-    group :group_1 do
-      condition { false }
+    """
+      group :group_1 do
+        condition { false }
 
-      group :group_1_1 do
-        condition { true }
+        group :group_1_1 do
+          condition { true }
 
-        define :rule_1_1_1 do
-          condition { false }
-          result('A')
+          define :rule_1_1_1 do
+            condition { false }
+            result('A')
+          end
+
+          default('B')
         end
 
-        default('B')
+        define :rule_1_1 do
+          condition { true }
+          result('C')
+        end
+
+        define :rule_1_2 do
+          condition { true }
+          result('D')
+        end
       end
 
-      define :rule_1_1 do
-        condition { true }
-        result('C')
+      define :rule_2 do
+        condition { false }
+        result('E')
       end
 
-      define :rule_1_2 do
-        condition { true }
-        result('D')
-      end
-    end
-
-    define :rule_2 do
-      condition { false }
-      result('E')
-    end
-
-    default('F')
-  """
+      default('F')
+    """
   Then all the outcomes are "A, B, C, D, E, F"
 
 Scenario: Rule is evaluated from top to bottom order
