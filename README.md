@@ -12,6 +12,21 @@ This provide a DSL to implement rules for various tasks. In the current version 
 
 ### Rules
 
+#### Gherkin (Beta)
+
+rulezilla Gherkin has only very limited support now
+
+First set the path of which rulezilla can load the feature files from:
+
+    Rulezilla.set_gherkin_rules_path 'absolute path'
+
+The filename will then converted to the name of the class, e.g. `invalid_number_rule.feature` will generate `Rulezilla::InvalidNumberRule` class
+
+We currently only support a very limited steps, please refer to [Invalid number rule feature](spec/features/gherkin_rules/invalid_number_rule.feature)
+
+
+#### Ruby
+
 To use rulezilla, please include `Rulezilla::DSL` in your class:
 
     class RoboticsRule
