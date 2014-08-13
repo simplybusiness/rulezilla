@@ -27,13 +27,13 @@ steps_for :rule_steps do
 
   step 'this is a invalid telephone number' do
     @records.each do |record|
-      expect(Rulezilla::InvalidNumberRule.apply(record)).to eq true
+      expect(Rulezilla::InvalidTelephoneNumberRule.apply(record)).to eq true
     end
   end
 
   step 'this is not a invalid telephone number' do
     @records.each do |record|
-      expect(Rulezilla::InvalidNumberRule.apply(record)).to eq false
+      expect(Rulezilla::InvalidTelephoneNumberRule.apply(record)).to eq false
     end
   end
 

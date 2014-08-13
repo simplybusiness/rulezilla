@@ -1,12 +1,8 @@
 @rule_steps
-Feature: InvalidNumberRule
+Feature: Invalid Telephone Number Rule
 
   Scenario: telephone number is blank
     When the "telephone number" is "blank"
-    Then this is a invalid telephone number
-
-  Scenario: telephone number too short
-    When the "telephone number" is "less than 10 digits"
     Then this is a invalid telephone number
 
   Scenario: telephone number is phoney

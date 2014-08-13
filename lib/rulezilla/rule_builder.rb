@@ -17,7 +17,7 @@ module Rulezilla
 
     def build
       klass_definition = rules.map do |rule|
-        rule = RuleDefinition.new(rule)
+        rule = RuleDefinition.new(rule, step_keyword)
 
         condition_definition = rule.conditions.empty? ? "" : "condition { #{rule.conditions} }"
 
@@ -40,6 +40,10 @@ module Rulezilla
 
     private
 
+    def step_keyword
+      gherkin_json.first['name'].gsub(/\s?rule/i, '')
+    end
+
     def rules
       gherkin_json.first['elements']
     end
@@ -59,8 +63,9 @@ module Rulezilla
 
 
     class RuleDefinition
-      def initialize(gherkin_json)
+      def initialize(gherkin_json, step_keyword)
         @gherkin_json = gherkin_json
+        @step_keyword = step_keyword
       end
 
       def name
@@ -70,18 +75,23 @@ module Rulezilla
       def conditions
         condition_steps = steps.reject{|step| step['keyword'].strip.downcase == 'then'}
         conditions = condition_steps.map do |step|
-          ::Rulezilla::RuleBuilder::GherkinToConditionRule.apply(step)
+          ::Rulezilla::RuleBuilder::GherkinToConditionRule.apply(record(step))
         end.reject{|condition| condition == Rulezilla::RuleBuilder::DefaultCondition}.join(' && ')
       end
 
       def result
-        ::Rulezilla::RuleBuilder::GherkinToResultRule.apply steps.detect{|step| step['keyword'].strip.downcase == 'then'}
+        ::Rulezilla::RuleBuilder::GherkinToResultRule.apply record(steps.detect{|step| step['keyword'].strip.downcase == 'then'})
       end
+
+      private
 
       def steps
         @steps ||= @gherkin_json['steps']
       end
 
+      def record(step)
+        record = step.merge(step_keyword: @step_keyword)
+      end
     end
   end
 end
