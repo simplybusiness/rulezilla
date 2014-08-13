@@ -6,10 +6,10 @@ module Rulezilla
       include Rulezilla::DSL
 
       define :'this is a "field"' do
-        condition { name =~ /^this is an? \"(.*)\"$/i }
+        condition { name =~ /^this is\s?a?n? \"(.*)\"$/i }
 
         result do
-          field = name.scan(/^this is an? \"(.*)\"$/i).flatten.first
+          field = name.scan(/^this is\s?a?n? \"(.*)\"$/i).flatten.first
           "#{field}?"
         end
       end
