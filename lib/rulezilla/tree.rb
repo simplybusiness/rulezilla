@@ -3,8 +3,9 @@ module Rulezilla
     attr_reader :current_node, :root_node
 
     def initialize(node)
-      @root_node    = node
-      @current_node = node
+      @root_node      = node
+      @root_node.name = :root
+      @current_node   = node
     end
 
     def go_up
