@@ -15,6 +15,7 @@ step 'the support module called :support_klass_name has definition:' do |support
 end
 
 step 'the record has attribute :method and returns :value' do |method, value|
+  @record ||= {}
   value = case value
     when 'true'
       true
@@ -25,12 +26,12 @@ step 'the record has attribute :method and returns :value' do |method, value|
     else
       value
     end
-  @record = {method => value}
+  @record[method] = value
 end
 
 step 'the record has attribute :attributes' do |attributes|
+  @record ||= {}
   attributes = attributes.split(',').map(&:strip)
-  @record = {}
   attributes.each do |key|
     @record[key] = true
   end
