@@ -2,7 +2,7 @@
 Feature: AnimalRule
 
   Scenario: entity is a cat
-    When the "entity" is "cat"
+    When this is a "cat"
     Then this is an animal
 
   Scenario: telephone number is dog or bird

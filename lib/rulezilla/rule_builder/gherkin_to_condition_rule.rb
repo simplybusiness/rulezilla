@@ -5,6 +5,15 @@ module Rulezilla
     class GherkinToConditionRule
       include Rulezilla::DSL
 
+      define :'this is a "field"' do
+        condition { name =~ /^this is an? \"(.*)\"$/i }
+
+        result do
+          field = name.scan(/^this is an? \"(.*)\"$/i).flatten.first
+          "#{field}?"
+        end
+      end
+
       define :'the "field" is "value"' do
         condition { name =~ /^the \"(.*)\" is \"(.*)\"$/i }
 

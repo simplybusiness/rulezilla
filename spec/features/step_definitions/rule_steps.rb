@@ -1,5 +1,9 @@
 steps_for :rule_steps do
 
+  step 'this is a "cat"' do
+    @records = [{cat?: true}]
+  end
+
   step 'the :field is :value' do |field, value|
     record ||= {}
     field = field.gsub(/\s/,'_').downcase
