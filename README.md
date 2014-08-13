@@ -66,6 +66,9 @@ if the entity is:
     RoboticsRule.trace(entity)
     #=> all the nodes instance: [root, may_not_injure_human, obey_human, protect_its_own_existence] in sequence order.
 
+#### To get all results from the Rule
+
+    RoboticsRule.results #=> [true, false]
 
 
 # Syntax
