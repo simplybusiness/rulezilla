@@ -12,23 +12,20 @@ module Rulezilla
     end
 
     def find(record, node=@root_node)
-      evaluator = NodeEvaluator.new(record, node)
-      if evaluator.applies?
+      if node.applies?(record)
         if node.has_children?
           node.children.each do |child_node|
             value = find(record, child_node)
             return value unless value.nil?
           end
         end
-        return evaluator.result
+        return node.result(record)
       end
     end
 
     def all_results(record, node=@root_node, results=[])
-      evaluator = NodeEvaluator.new(record, node)
-
-      if evaluator.has_result?
-        results << evaluator.result rescue NoMethodError
+      if node.has_result?
+        results << node.result(record) rescue NoMethodError
       end
 
       node.children.each do |child_node|
