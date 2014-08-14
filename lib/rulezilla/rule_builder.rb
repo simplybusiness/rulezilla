@@ -90,7 +90,7 @@ module Rulezilla
       end
 
       def record(step)
-        record = step.merge(step_keyword: @step_keyword)
+        step.merge(step_keyword: @step_keyword)
       end
     end
   end
