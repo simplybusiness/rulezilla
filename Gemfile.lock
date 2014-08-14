@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    rulezilla (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -32,6 +37,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  gherkin
   pry
   rspec
+  rulezilla!
   turnip
