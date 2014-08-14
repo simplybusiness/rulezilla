@@ -1,14 +1,14 @@
 @rule_steps
 Feature: Duration Rule
 
-  Scenario: 60 seconds
-    When the "number of seconds" is "60"
+  Scenario: Maths class
+    When the "name of the class" is "Maths"
     Then the duration is "1" minute
 
-  Scenario: 600 minute
-    When the "number of minutes" is "600"
+  Scenario: Science class
+    When the "name of the class" is "Science"
     Then the duration is "10" hours
 
-  Scenario: 48 hours
-    When the "number of hours" is "48"
+  Scenario: PE
+    When the "name of the class" is "PE"
     Then the duration is "2" days
