@@ -18,7 +18,7 @@ rulezilla Gherkin has only very limited support now
 
 First set the path of which rulezilla can load the feature files from:
 
-    Rulezilla.set_gherkin_rules_path 'absolute path'
+    Rulezilla.gherkin_rules_path = 'absolute path'
 
 The filename will then converted to the name of the class, e.g. `invalid_number_rule.feature` will generate `Rulezilla::InvalidNumberRule` class
 
