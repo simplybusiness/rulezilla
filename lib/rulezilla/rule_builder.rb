@@ -8,11 +8,15 @@ require 'rulezilla/rule_builder/gherkin_to_condition_rule'
 module Rulezilla
   class RuleBuilder
 
-    attr_reader :name, :file
+    def self.from_file(name, file)
+      new(name, IO.read(file))
+    end
 
-    def initialize(name, file)
-      @name = name
-      @file = file
+    attr_reader :name, :content
+
+    def initialize(name, content)
+      @name    = name
+      @content = content
     end
 
     def build
@@ -54,7 +58,7 @@ module Rulezilla
         formatter = Gherkin::Formatter::JSONFormatter.new(io)
         parser    = Gherkin::Parser::Parser.new(formatter)
 
-        parser.parse(IO.read(file), file, 0)
+        parser.parse(content, content, 0)
         formatter.done
 
         JSON.parse(io.string)
