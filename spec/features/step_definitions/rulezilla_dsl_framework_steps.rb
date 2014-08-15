@@ -1,3 +1,20 @@
+step 'the gherkin is:' do |gherkin|
+  @rule_klass_name = 'DummyRule'
+  @rule_klass = Rulezilla::RuleBuilder.new(@rule_klass_name, gherkin).build
+end
+
+step 'the incorrect gherkin is:' do |gherkin|
+  @gherkin = gherkin
+end
+
+step 'it raises exception :exception' do |exception|
+  @record ||= {}
+
+  result = result == 'nil' ? nil : result
+
+  expect{ @rule_klass.apply(@record) }.to raise_error{ RuntimeError.new(exception) }
+end
+
 step 'the rule class name is :klass_name' do |klass_name|
   @rule_klass_name = klass_name
 end
@@ -40,7 +57,16 @@ end
 step 'the result is :result' do |result|
   @record ||= {}
 
-  result = result == 'nil' ? nil : result
+  result = case result
+    when 'true'
+      true
+    when 'false'
+      false
+    when 'nil'
+      nil
+    else
+      result
+    end
 
   expect(@rule_klass.apply(@record)).to eq result
 end
@@ -50,13 +76,22 @@ step 'all the outcomes are :outcomes' do |outcomes|
   expect(@rule_klass.results).to match_array outcomes
 end
 
-step ':does_or_does_not not raise the exception :exception' do |does_or_does_not, exception|
+step ':does_or_does_not raise the exception :exception' do |does_or_does_not, exception|
   if does_or_does_not == 'does'
     expect{ @rule_klass.apply @record }.to raise_error do |exception|
       expect(exception.message).to match /#{exception}/
     end
   else
     expect{ @rule_klass.apply @record }.not_to raise_error
+  end
+end
+
+step 'it raises exception :exception' do |exception|
+  expect {
+    @rule_klass_name = 'DummyRule'
+    @rule_klass = Rulezilla::RuleBuilder.new(@rule_klass_name, @gherkin).build
+    }.to raise_error do |exception|
+    expect(exception.message).to match /#{exception}/
   end
 end
 

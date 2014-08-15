@@ -10,5 +10,9 @@ RSpec.configure do |config|
     Object.send(:remove_const, (@rule_klass_name || 'DummyRule').to_sym) rescue NameError
     Object.send(:remove_const, "#{(@rule_klass_name || 'DummyRule')}Record".to_sym) rescue NameError
     Object.send(:remove_const, "#{(@support_name || 'DummyRule')}Support".to_sym) rescue NameError
+
+    Rulezilla.send(:remove_const, (@rule_klass_name || 'DummyRule').to_sym) rescue NameError
+    Rulezilla.send(:remove_const, "#{(@rule_klass_name || 'DummyRule')}Record".to_sym) rescue NameError
+    Rulezilla.send(:remove_const, "#{(@support_name || 'DummyRule')}Support".to_sym) rescue NameError
   end
 end

@@ -180,7 +180,7 @@ Scenario Outline: Validate the presence of attributes
       default(true)
     """
   When the record has attribute "<attributes>"
-  Then "<does or does not>" not raise the exception "<exception>"
+  Then "<does or does not>" raise the exception "<exception>"
 
   Examples:
     | attributes    | does or does not | exception                 |
