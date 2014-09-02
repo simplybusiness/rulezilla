@@ -19,7 +19,7 @@ module Rulezilla
     if matching_file.nil?
       super
     else
-      Rulezilla::RuleBuilder.new(name, matching_file).build
+      Rulezilla::RuleBuilder.from_file(name, matching_file).build
     end
   end
 
