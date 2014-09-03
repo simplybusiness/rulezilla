@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.name          = 'rulezilla'
   gem.require_paths = ['lib']
-  gem.version       = "0.1.0"
+  gem.version       = "0.1.1"
   gem.license       = 'MIT'
 
   gem.add_development_dependency('gherkin')
