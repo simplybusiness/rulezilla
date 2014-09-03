@@ -5,5 +5,7 @@ module Rulezilla
       value == false
     end
 
+    alias_method :is_not?, :does_not?
+
   end
 end
