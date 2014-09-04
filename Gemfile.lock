@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    rulezilla (0.1.0)
+    rulezilla (0.1.1)
+      gherkin
 
 GEM
   remote: https://rubygems.org/
@@ -37,7 +38,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  gherkin
   pry
   rspec
   rulezilla!

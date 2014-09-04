@@ -11,5 +11,5 @@ Gem::Specification.new do |gem|
   gem.version       = "0.1.1"
   gem.license       = 'MIT'
 
-  gem.add_development_dependency('gherkin')
+  gem.add_runtime_dependency('gherkin')
 end
