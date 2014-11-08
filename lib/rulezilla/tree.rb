@@ -14,11 +14,9 @@ module Rulezilla
 
     def trace(record, node=@root_node)
       if node.applies?(record)
-        if node.has_children?
-          node.children.each do |child_node|
-            array = trace(record, child_node)
-            return [node] + array unless array.empty?
-          end
+        node.children.each do |child_node|
+          array = trace(record, child_node)
+          return [node] + array unless array.empty?
         end
         return node.has_result? ? [node] : []
       end
@@ -31,7 +29,7 @@ module Rulezilla
       end
 
       node.children.each do |child_node|
-        results += all_results(record, child_node, results)
+        all_results(record, child_node, results)
       end
 
       return results
