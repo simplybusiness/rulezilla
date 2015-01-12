@@ -148,6 +148,44 @@ Scenario Outline: It evaluate the rule against a record
     | false | Oh, too bad   |
 
 
+Scenario: To get all matching outcome from a rule
+  Given the rule is:
+    """
+      group :group_1 do
+        condition { true }
+
+        group :group_1_1 do
+          condition { true }
+
+          define :rule_1_1_1 do
+            condition { false }
+            result('A')
+          end
+
+          default('B')
+        end
+
+        define :rule_1_1 do
+          condition { true }
+          result('C')
+        end
+
+        define :rule_1_2 do
+          condition { true }
+          result('D')
+        end
+      end
+
+      define :rule_2 do
+        condition { false }
+        result('E')
+      end
+
+      default('F')
+    """
+  Then all the matching outcomes are "B, C, D, F"
+
+
 Scenario: Support Module
   Given the rule class name is "FruitRule"
   And the support module called "FruitRuleSupport" has definition:

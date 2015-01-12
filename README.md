@@ -80,9 +80,13 @@ if the entity is:
       not_letting_itself_be_detroyed?: true
     }
 
-#### To get the result
+#### To get the first matching result
 
     RoboticsRule.apply(entity) #=> true
+
+#### To get all matching results
+
+    RoboticsRule.all(entity) #=> [true]
 
 #### To get the trace of all node
 

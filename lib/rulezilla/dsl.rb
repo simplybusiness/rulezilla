@@ -49,6 +49,12 @@ module Rulezilla
         result_node.nil? ? nil : result_node.result(record_klass_instance(record))
       end
 
+      def all(record={})
+        result_node = tree.find_all(record)
+
+        result_node.nil? ? nil : result_node.map { |node| node.result(record_klass_instance(record)) }
+      end
+
       def results(record=nil)
         tree.all_results(record_klass_instance(record)).uniq
       end

@@ -12,6 +12,18 @@ module Rulezilla
       @current_node = is_root? ? @root_node : @current_node.parent
     end
 
+    def find_all(record, node=@root_node)
+      array = []
+      if node.applies?(record)
+        node.children.each do |child_node|
+          array += find_all(record, child_node)
+        end
+
+        return node.has_result? ? array + [node] : array
+      end
+      return array
+    end
+
     def trace(record, node=@root_node)
       if node.applies?(record)
         node.children.each do |child_node|
