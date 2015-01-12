@@ -76,6 +76,11 @@ step 'all the outcomes are :outcomes' do |outcomes|
   expect(@rule_klass.results).to match_array outcomes
 end
 
+step 'all the matching outcomes are :outcomes' do |outcomes|
+  outcomes = outcomes.split(',').map(&:strip)
+  expect(@rule_klass.all(@record)).to match_array outcomes
+end
+
 step ':does_or_does_not raise the exception :exception' do |does_or_does_not, exception|
   if does_or_does_not == 'does'
     expect{ @rule_klass.apply @record }.to raise_error do |exception|
