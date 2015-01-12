@@ -50,7 +50,9 @@ module Rulezilla
       end
 
       def all(record={})
-        tree.find_all(record)
+        result_node = tree.find_all(record)
+
+        result_node.nil? ? nil : result_node.map { |node| node.result(record_klass_instance(record)) }
       end
 
       def results(record=nil)

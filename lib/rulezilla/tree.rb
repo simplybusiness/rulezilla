@@ -19,7 +19,7 @@ module Rulezilla
           array += find_all(record, child_node)
         end
 
-        return node.has_result? ? array + [node.result(record)] : array
+        return node.has_result? ? array + [node] : array
       end
       return array
     end
