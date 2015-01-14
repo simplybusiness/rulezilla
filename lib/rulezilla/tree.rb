@@ -55,9 +55,16 @@ module Rulezilla
       node
     end
 
-    def append_children(children)
-      children.each do |node|
-        @current_node.add_child(node)
+    def clone_and_append_children(children, node=@current_node)
+      children.each do |child_node|
+        child_node = child_node.dup
+        node.add_child(child_node)
+
+        if child_node.has_children?
+          children_nodes = child_node.children
+          child_node.children = []
+          clone_and_append_children(children_nodes, child_node)
+        end
       end
     end
 

@@ -67,7 +67,7 @@ module Rulezilla
       end
 
       def include_rule(rule)
-        tree.append_children(rule.tree.root_node.children)
+        tree.clone_and_append_children(rule.tree.root_node.children)
       end
 
       def tree
