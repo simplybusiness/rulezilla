@@ -66,11 +66,15 @@ module Rulezilla
         tree.trace(record_klass_instance(record))
       end
 
-      private
+      def include_rule(rule)
+        tree.append_children(rule.tree.root_node.children)
+      end
 
       def tree
         @tree ||= Tree.new(Node.new())
       end
+
+      private
 
       def record_klass_instance(record)
         Object.const_get("#{self.name}Record").new(record)

@@ -25,6 +25,19 @@ step 'the rule is:' do |rules|
   @rule_klass.class_eval(rules.to_s)
 end
 
+step 'our rule is:' do |rules|
+  @rule_klass = Object.const_set("DummyRule", Class.new)
+  @rule_klass.class_eval('include Rulezilla::DSL')
+  @rule_klass.class_eval(rules.to_s)
+end
+
+step 'there is a rule called :rule_name:' do |rule_name, rules|
+  send 'the rule class name is :klass_name', rule_name
+  @rule_klass = Object.const_set(@rule_klass_name || "DummyRule", Class.new)
+  @rule_klass.class_eval('include Rulezilla::DSL')
+  @rule_klass.class_eval(rules.to_s)
+end
+
 step 'the support module called :support_klass_name has definition:' do |support_name, support_definition|
   @support_name = support_name
   @support = Object.const_set(support_name, Module.new)
