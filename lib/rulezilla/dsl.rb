@@ -34,8 +34,7 @@ module Rulezilla
         end
       end
 
-      private_class_method :get_super
-      private_class_method :demodulize_klass_name
+      private_class_method :create_klass, :get_super, :demodulize_klass_name
     end
 
     module ClassMethods
@@ -67,7 +66,11 @@ module Rulezilla
       end
 
       def include_rule(rule)
-        tree.clone_and_append_children(rule.tree.root_node.children)
+        if rule.ancestors.include?(Rulezilla::DSL)
+          tree.clone_and_append_children(rule.tree.root_node.children)
+        else
+          raise "#{rule.name} is not a Rulezilla class"
+        end
       end
 
       def tree
