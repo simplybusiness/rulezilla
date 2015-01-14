@@ -35,7 +35,7 @@ We currently only support a very limited steps, please refer to:
 
 #### Ruby
 
-Please refer to the [feature](spec/features/step_definitions/rulezilla_dsl_framework_steps.rb) for further details
+Please refer to the [feature](spec/features/rulezilla_dsl_framwork.feature) for further details
 
 To use rulezilla, please include `Rulezilla::DSL` in your class:
 
