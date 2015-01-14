@@ -148,7 +148,7 @@ Scenario Outline: It evaluate the rule against a record
     | false | Oh, too bad   |
 
 
-Scenario: To get all matching outcome from a rule
+Scenario: To get all matching outcomes from a rule
   Given the rule is:
     """
       group :group_1 do
@@ -277,3 +277,23 @@ Scenario Outline: Trace the path to the result
     | true              | false             | true             | true             | root -> group_1                      |
     | false             | true              | true             | true             | root -> rule_3                       |
     | false             | true              | true             | false            | root                                 |
+
+Scenario: Include rule
+  Given there is a rule called "CommonRule":
+    """
+      define :a do
+        condition { true }
+        result { 'A' }
+      end
+
+      define :b do
+        condition { false }
+        result { 'B' }
+      end
+    """
+  And our rule is:
+    """
+      include_rule CommonRule
+    """
+  Then all the outcomes are "A, B"
+  And the result is "A"

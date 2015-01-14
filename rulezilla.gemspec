@@ -1,3 +1,6 @@
+$:.push File.expand_path("../lib", __FILE__)
+require 'rulezilla/version'
+
 Gem::Specification.new do |gem|
   gem.authors       = ['Peter Wu']
   gem.email         = ['peter.wu@simplybusiness.com']
@@ -8,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.name          = 'rulezilla'
   gem.require_paths = ['lib']
-  gem.version       = "0.1.3"
+  gem.version       = Rulezilla::VERSION
   gem.license       = 'MIT'
 
   gem.add_runtime_dependency('gherkin')

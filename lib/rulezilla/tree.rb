@@ -55,6 +55,12 @@ module Rulezilla
       node
     end
 
+    def append_children(children)
+      children.each do |node|
+        @current_node.add_child(node)
+      end
+    end
+
     private
     def is_root?
       @current_node == @root_node
