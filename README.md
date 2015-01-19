@@ -1,6 +1,6 @@
 [![Semaphore](https://semaphoreapp.com/api/v1/projects/e488365d-9c57-4431-916a-72aea091d1b5/229083/shields_badge.png)](https://semaphoreapp.com/simplybusiness/rulezilla)
 [![Code Climate](https://codeclimate.com/repos/53ecc0416956800c1d01f6bf/badges/76b47eaeffc33e312508/gpa.svg)](https://codeclimate.com/repos/53ecc0416956800c1d01f6bf/feed)
-
+[![Gem Version](https://badge.fury.io/rb/rulezilla.svg)](http://badge.fury.io/rb/rulezilla)
 
 rulezilla
 =========
@@ -10,7 +10,7 @@ This provide a DSL to implement rules for various tasks. In the current version 
 
 # Installation
 
-    gem 'rulezilla', git: 'git@github.com:simplybusiness/rulezilla.git'
+    gem 'rulezilla'
 
 ## Implementation
 
