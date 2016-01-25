@@ -14,5 +14,5 @@ Gem::Specification.new do |gem|
   gem.version       = Rulezilla::VERSION
   gem.license       = 'MIT'
 
-  gem.add_runtime_dependency('gherkin')
+  gem.add_runtime_dependency('gherkin', '~> 2.5')
 end
