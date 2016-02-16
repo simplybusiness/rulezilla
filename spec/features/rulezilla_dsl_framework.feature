@@ -85,7 +85,7 @@ Scenario: If nothing is matched in a group, it will fall to default value of the
   Then the result is "It is alright"
 
 
-Scenario: If nothing is matched, and no default is define in the group, it will fall to the next default
+Scenario: If nothing is matched, and no default is defined in the group, it will fall to the next default
   Given the rule is:
     """
       group :group_1 do
@@ -126,7 +126,7 @@ Scenario: If nothing is matched, it will continue to evaluate the next group
   Then the result is "Bad"
 
 
-Scenario Outline: It evaluate the rule against a record
+Scenario Outline: It evaluates the rule against a record
   Given the rule is:
     """
       define :fruit do
@@ -227,7 +227,7 @@ Scenario Outline: Validate the presence of attributes
     | apple, orange | does not         |                           |
 
 
-Scenario: Rule return nil if no rule is defined Given the rule is:
+Scenario: Rule return nil if no rule is defined
   Given the rule is:
     """
     """
