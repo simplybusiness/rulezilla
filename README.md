@@ -5,7 +5,8 @@
 rulezilla
 =========
 
-This provide a DSL to implement rules for various tasks. In the current version we are still rely user to have a certain level of Ruby knowledge to be able to use this DSL. The ultimate goal is for people without prior Ruby knowledge can change and even write the Rule.
+This provides a DSL to implement rules for various tasks. In the current version we are still relying on user to have a certain level of Ruby knowledge 
+in order to be able to use this DSL. The ultimate goal is for people without prior Ruby knowledge to be able to change and even write the Rule.
 
 
 # Installation
