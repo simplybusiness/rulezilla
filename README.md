@@ -11,9 +11,23 @@ in order to be able to use this DSL. The ultimate goal is for people without pri
 
 # Installation
 
-    gem 'rulezilla'
+## Using `Gemfile`
 
-## Implementation
+Add the following line to your `Gemfile`:
+
+    gem 'rulezilla'
+    
+Then run:
+    
+    bundle install
+        
+## Without `Gemfile`
+        
+On your command line run the following:
+        
+    gem install 'rulezilla'
+
+## Usage
 
 ### Rules
 
