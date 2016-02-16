@@ -93,12 +93,12 @@ e.g. if the rule class name is `RoboticsRule`, then the support would be `Roboti
 
 ### How to execute the rule
 
-if the entity is:
+If the entity is:
 
-    {
-      not_injure_human?: true,
-      do_as_human_told?: true,
-      in_danger?:        true,
+    entity = {
+      not_injure_human?:               true,
+      do_as_human_told?:               true,
+      in_danger?:                      true,
       not_letting_itself_be_detroyed?: true
     }
 
@@ -110,7 +110,7 @@ if the entity is:
 
     RoboticsRule.all(entity) #=> [true]
 
-#### To get the trace of all node
+#### To get the trace of all nodes
 
     RoboticsRule.trace(entity)
     #=> all the nodes instance: [root, may_not_injure_human, obey_human, protect_its_own_existence] in sequence order.
@@ -120,10 +120,10 @@ if the entity is:
     RoboticsRule.results #=> [true, false]
 
 
-# Syntax
+### Syntax
 
 Please refer to the features for DSL syntax:
 
-[DSL Feature](spec/features/rulezilla_dsl_framwork.feature),
+[DSL Feature](spec/features/rulezilla_dsl_framework.feature),
 
 [Default Support Methods Feature](spec/features/default_support_methods.feature)
