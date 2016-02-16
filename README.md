@@ -35,20 +35,21 @@ Rules can be defined either using `Gherkin` or pure Ruby. In either case, rules 
 
 #### Gherkin (Beta)
 
-rulezilla Gherkin has only very limited support now
+> *Note:* Currently, rulezilla Gherkin has only very limited support.
 
-First set the path of which rulezilla can load the feature files from:
+Rules are defined inside `.feature` files which should be organized under a specific directory. In order to be able to use these rules, you need to first
+set the path that rulezilla can use in order to load them.
 
-    Rulezilla.gherkin_rules_path = 'absolute path'
+    Rulezilla.gherkin_rules_path = 'absolute path to folder holding your feature files'
 
-The filename will then converted to the name of the class, e.g. `invalid_number_rule.feature` will generate `Rulezilla::InvalidNumberRule` class
+Rulezilla will load all the feature files and for each one will create a rule class. The filename will be used to build the name of the rule class. For example,
+the file with name `invalid_number_rule.feature` will generate rule class `Rulezilla::InvalidNumberRule`.
 
-We currently only support a very limited steps, please refer to:
+We currently support a very limited type of steps. Please refer to:
 
 [True / False](spec/features/gherkin_rules/animal_rule.feature)
 
 [Duration](spec/features/gherkin_rules/duration_rule.feature)
-
 
 #### Ruby
 
