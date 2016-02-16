@@ -15,4 +15,7 @@ Gem::Specification.new do |gem|
   gem.license       = 'MIT'
 
   gem.add_runtime_dependency('gherkin', '~> 2.5')
+  gem.add_runtime_dependency('rspec')
+  gem.add_runtime_dependency('turnip')
+  gem.add_runtime_dependency('pry')
 end
