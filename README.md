@@ -53,9 +53,9 @@ We currently support a very limited type of steps. Please refer to:
 
 #### Ruby
 
-Please refer to the [feature](spec/features/rulezilla_dsl_framwork.feature) for further details
+You can use plain Ruby to define the rule classes. But you will need to include the `Rulezilla::DSL` module. That will give you access to the DSL used to define rules.
 
-To use rulezilla, please include `Rulezilla::DSL` in your class:
+Here is an example:
 
     class RoboticsRule
       include Rulezilla::DSL
@@ -76,6 +76,8 @@ To use rulezilla, please include `Rulezilla::DSL` in your class:
       default(false)
 
     end
+
+Please refer to the [feature](spec/features/rulezilla_dsl_framework.feature) for further details of the DSL.
 
 ### Support Module
 
