@@ -31,6 +31,8 @@ On your command line run the following:
 
 ### Rules
 
+Rules can be defined either using `Gherkin` or pure Ruby. In either case, rules are classes that include the `Rulezilla::DSL`.
+
 #### Gherkin (Beta)
 
 rulezilla Gherkin has only very limited support now
