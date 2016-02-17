@@ -5,39 +5,57 @@
 rulezilla
 =========
 
-This provide a DSL to implement rules for various tasks. In the current version we are still rely user to have a certain level of Ruby knowledge to be able to use this DSL. The ultimate goal is for people without prior Ruby knowledge can change and even write the Rule.
+This provides a DSL to implement rules for various tasks. In the current version we are still relying on user to have a certain level of Ruby knowledge 
+in order to be able to use this DSL. The ultimate goal is for people without prior Ruby knowledge to be able to change and even write the Rule.
 
 
 # Installation
 
-    gem 'rulezilla'
+## Using `Gemfile`
 
-## Implementation
+Add the following line to your `Gemfile`:
+
+    gem 'rulezilla'
+    
+Then run:
+    
+    bundle install
+        
+## Without `Gemfile`
+        
+On your command line run the following:
+        
+    gem install 'rulezilla'
+
+## Usage
 
 ### Rules
 
+Rules can be defined either using `Gherkin` or pure Ruby. In either case, rules are classes that include the `Rulezilla::DSL`.
+
 #### Gherkin (Beta)
 
-rulezilla Gherkin has only very limited support now
+> *Note:* Currently, rulezilla Gherkin has only very limited support.
 
-First set the path of which rulezilla can load the feature files from:
+Rules are defined inside `.feature` files which should be organized under a specific directory. In order to be able to use these rules, you need to first
+set the path that rulezilla can use in order to load them.
 
-    Rulezilla.gherkin_rules_path = 'absolute path'
+    Rulezilla.gherkin_rules_path = 'absolute path to folder holding your feature files'
 
-The filename will then converted to the name of the class, e.g. `invalid_number_rule.feature` will generate `Rulezilla::InvalidNumberRule` class
+Rulezilla will load all the feature files and for each one will create a rule class. The filename will be used to build the name of the rule class. For example,
+the file with name `invalid_number_rule.feature` will generate rule class `Rulezilla::InvalidNumberRule`.
 
-We currently only support a very limited steps, please refer to:
+We currently support a very limited type of steps. Please refer to:
 
 [True / False](spec/features/gherkin_rules/animal_rule.feature)
 
 [Duration](spec/features/gherkin_rules/duration_rule.feature)
 
-
 #### Ruby
 
-Please refer to the [feature](spec/features/rulezilla_dsl_framwork.feature) for further details
+You can use plain Ruby to define the rule classes. But you will need to include the `Rulezilla::DSL` module. That will give you access to the DSL used to define rules.
 
-To use rulezilla, please include `Rulezilla::DSL` in your class:
+Here is an example:
 
     class RoboticsRule
       include Rulezilla::DSL
@@ -59,6 +77,8 @@ To use rulezilla, please include `Rulezilla::DSL` in your class:
 
     end
 
+Please refer to the [feature](spec/features/rulezilla_dsl_framework.feature) for further details of the DSL.
+
 ### Support Module
 
 The support module will be automatically included if its name is `"#{rule_class_name}Support"`
@@ -73,12 +93,12 @@ e.g. if the rule class name is `RoboticsRule`, then the support would be `Roboti
 
 ### How to execute the rule
 
-if the entity is:
+If the entity is:
 
-    {
-      not_injure_human?: true,
-      do_as_human_told?: true,
-      in_danger?:        true,
+    entity = {
+      not_injure_human?:               true,
+      do_as_human_told?:               true,
+      in_danger?:                      true,
       not_letting_itself_be_detroyed?: true
     }
 
@@ -90,7 +110,7 @@ if the entity is:
 
     RoboticsRule.all(entity) #=> [true]
 
-#### To get the trace of all node
+#### To get the trace of all nodes
 
     RoboticsRule.trace(entity)
     #=> all the nodes instance: [root, may_not_injure_human, obey_human, protect_its_own_existence] in sequence order.
@@ -100,10 +120,10 @@ if the entity is:
     RoboticsRule.results #=> [true, false]
 
 
-# Syntax
+### Syntax
 
 Please refer to the features for DSL syntax:
 
-[DSL Feature](spec/features/rulezilla_dsl_framwork.feature),
+[DSL Feature](spec/features/rulezilla_dsl_framework.feature),
 
 [Default Support Methods Feature](spec/features/default_support_methods.feature)
