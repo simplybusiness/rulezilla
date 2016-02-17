@@ -1,11 +1,11 @@
-[![Semaphore](https://semaphoreapp.com/api/v1/projects/e488365d-9c57-4431-916a-72aea091d1b5/229083/shields_badge.png)](https://semaphoreapp.com/simplybusiness/rulezilla)
+[![Build Status](https://semaphoreci.com/api/v1/projects/e488365d-9c57-4431-916a-72aea091d1b5/229083/shields_badge.svg)](https://semaphoreci.com/simplybusiness/rulezilla)
 [![Code Climate](https://codeclimate.com/repos/53ecc0416956800c1d01f6bf/badges/76b47eaeffc33e312508/gpa.svg)](https://codeclimate.com/repos/53ecc0416956800c1d01f6bf/feed)
 [![Gem Version](https://badge.fury.io/rb/rulezilla.svg)](http://badge.fury.io/rb/rulezilla)
 
 rulezilla
 =========
 
-This provides a DSL to implement rules for various tasks. In the current version we are still relying on user to have a certain level of Ruby knowledge 
+This provides a DSL to implement rules for various tasks. In the current version we are still relying on user to have a certain level of Ruby knowledge
 in order to be able to use this DSL. The ultimate goal is for people without prior Ruby knowledge to be able to change and even write the Rule.
 
 
@@ -16,15 +16,15 @@ in order to be able to use this DSL. The ultimate goal is for people without pri
 Add the following line to your `Gemfile`:
 
     gem 'rulezilla'
-    
+
 Then run:
-    
+
     bundle install
-        
+
 ## Without `Gemfile`
-        
+
 On your command line run the following:
-        
+
     gem install 'rulezilla'
 
 ## Usage
