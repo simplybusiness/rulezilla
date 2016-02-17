@@ -17,7 +17,7 @@ module Rulezilla
 
     def applies?(record)
       return true if condition.nil?
-      record.instance_eval(&condition)
+      !!record.instance_eval(&condition)
     end
 
     def result(record)
