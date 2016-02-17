@@ -185,6 +185,30 @@ Scenario: To get all matching outcomes from a rule
     """
   Then all the matching outcomes are "B, C, D, F"
 
+Scenario: To get all matching outcomes from a rule - scenario 2
+  Given the rule is:
+  """
+    group :may_not_injure_human do
+      condition { not_injure_human? }
+
+      group :obey_human do
+        condition { do_as_human_told? }
+        result(true)
+
+        define :protect_its_own_existence do
+          condition { in_danger? && not_letting_itself_be_detroyed? }
+          result(true)
+        end
+      end
+    end
+
+    default(false)
+  """
+  When the record has attribute "not_injure_human?" and returns "true"
+  When the record has attribute "do_as_human_told?" and returns "true"
+  When the record has attribute "in_dangert?" and returns "true"
+  When the record has attribute "not_letting_itself_be_detroyed?" and returns "true"
+  Then all the matching outcomes are "true"
 
 Scenario: Support Module
   Given the rule class name is "FruitRule"
