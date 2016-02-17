@@ -12,6 +12,8 @@ module Rulezilla
       @current_node = is_root? ? @root_node : @current_node.parent
     end
 
+    # Returns all the result outcomes of all the matching nodes.
+    #
     def find_all(record, node=@root_node)
       array = []
       if node.applies?(record)
@@ -21,7 +23,7 @@ module Rulezilla
 
         return node.has_result? ? array + [node] : array
       end
-      return array
+      array
     end
 
     def trace(record, node=@root_node)

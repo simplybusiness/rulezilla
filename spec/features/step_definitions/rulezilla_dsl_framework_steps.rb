@@ -90,7 +90,7 @@ step 'all the outcomes are :outcomes' do |outcomes|
 end
 
 step 'all the matching outcomes are :outcomes' do |outcomes|
-  outcomes = outcomes.split(',').map(&:strip)
+  outcomes = outcomes.split(',').map(&:strip).map {|o| o == 'true' ? true : (o == 'false' ? false : o)}
   expect(@rule_klass.all(@record)).to match_array outcomes
 end
 
