@@ -102,13 +102,17 @@ If the entity is:
       not_letting_itself_be_detroyed?: true
     }
 
-#### To get the first matching result
+#### To get the first matching result output
 
     RoboticsRule.apply(entity) #=> true
 
-#### To get all matching results
+#### To get all matching result outputs
 
-    RoboticsRule.all(entity) #=> [true]
+    RoboticsRule.all(entity) #=> [true, false]
+    
+Note that `false` is the result outcome coming out from `default(false)` on top level, which is also called `root node`. The `root` node does not have any condition and hence
+it is considered to be matching. This means, by consequence, that its result (`default(false)`) is included in the list of matching result outputs which `#all(entity)` above
+returns.
 
 #### To get the trace of all nodes
 
