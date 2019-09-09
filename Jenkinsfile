@@ -34,9 +34,9 @@ pipeline {
         sh "bnw_runner ./_pipeline/utils/slack_notification_on_master.sh ${PROJECT} ${currentBuild.currentResult} 'Starting build for ${PROJECT} v${GEM_VERSION}'"
       }
     }
-    stage('Test gem') {
+    stage('Check Semaphore') {
       steps {
-        sh "bnw_runner ./_pipeline/step_test_gem.sh"
+        sh "bnw_runner ./_pipeline/step_check_semaphore.sh"
       }
     }
     stage('Build Gem') {
