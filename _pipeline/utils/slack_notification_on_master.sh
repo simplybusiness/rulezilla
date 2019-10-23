@@ -4,5 +4,5 @@ set -e
 
 # Notify 'release' that the release is finished
 if [[ "${ENVIRONMENT}" == "live" ]] && [[ "${BRANCH_NAME}" == 'master' ]]; then
-    slack_notification $1 release $2 "$3"
+    slack_notification $1 lapd-notifications $2 "$3"
 fi
