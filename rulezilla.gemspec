@@ -15,8 +15,8 @@ Gem::Specification.new do |gem|
   gem.license       = 'MIT'
 
   gem.add_runtime_dependency('rspec')
-  gem.add_runtime_dependency('turnip')
   gem.add_development_dependency('pry')
+  gem.add_development_dependency('turnip')
   gem.add_development_dependency('pry-doc')
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the
