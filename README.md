@@ -31,25 +31,7 @@ On your command line run the following:
 
 ### Rules
 
-Rules can be defined either using `Gherkin` or pure Ruby. In either case, rules are classes that include the `Rulezilla::DSL`.
-
-#### Gherkin (Beta)
-
-> *Note:* Currently, rulezilla Gherkin has only very limited support.
-
-Rules are defined inside `.feature` files which should be organized under a specific directory. In order to be able to use these rules, you need to first
-set the path that rulezilla can use in order to load them.
-
-    Rulezilla.gherkin_rules_path = 'absolute path to folder holding your feature files'
-
-Rulezilla will load all the feature files and for each one will create a rule class. The filename will be used to build the name of the rule class. For example,
-the file with name `invalid_number_rule.feature` will generate rule class `Rulezilla::InvalidNumberRule`.
-
-We currently support a very limited type of steps. Please refer to:
-
-[True / False](spec/features/gherkin_rules/animal_rule.feature)
-
-[Duration](spec/features/gherkin_rules/duration_rule.feature)
+Rules are defined in Ruby. Rules are classes that include the `Rulezilla::DSL`.
 
 #### Ruby
 

@@ -84,8 +84,13 @@ module Rulezilla
       end
 
       def missing_attributes(record)
-        record = OpenStruct.new(record) if record.is_a?(Hash)
-        mandatory_attributes.map(&:to_sym) - record.methods
+        record_attributes = if record.is_a?(Hash) || record.is_a?(OpenStruct)
+          record.to_h.keys.map(&:to_sym)
+        else
+          record.methods
+        end
+
+        mandatory_attributes.map(&:to_sym) - record_attributes
       end
 
       def validate_missing_attributes(record)
