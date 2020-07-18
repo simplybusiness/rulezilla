@@ -16,7 +16,8 @@ blocks:
         commands:
           - checkout
           - cache restore bundle-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_WORKFLOW_ID,bundle-$SEMAPHORE_GIT_BRANCH,bundle-master
-          - bundle install --path vendor/bundle
+          - bundle config set path 'vendor/bundle'
+          - bundle install
           - bundle clean --force
           - cache store bundle-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_WORKFLOW_ID vendor/bundle
       jobs:
