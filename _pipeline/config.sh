@@ -4,5 +4,4 @@
 # Semaphore settings
 # ------------------------------------------------------------------------------
 #
-# This gem is not yet on semaphore for some reason
-export APP_SEMAPHORE_ID='e488365d-9c57-4431-916a-72aea091d1b5'
+export SEMAPHORE_V2_PROJECT_ID='a4211f65-a22f-4e39-aec9-65c9d1040144'
