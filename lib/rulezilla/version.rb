@@ -1,5 +1,5 @@
 module Rulezilla
-  base = '0.3.0'
+  base = '0.3.1'
 
   # SB-specific versioning "algorithm" to accommodate BNW/Jenkins/gemstash
   VERSION = (pre = ENV.fetch('GEM_PRE_RELEASE', '')).empty? ? base : "#{base}.#{pre}"
