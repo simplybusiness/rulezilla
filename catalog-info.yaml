@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: rulezilla
+  description:  Rule DSL 
+spec:
+  type: library
+  lifecycle: production
