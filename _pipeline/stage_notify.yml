@@ -1,0 +1,9 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - docker_setup
+  build:
+    commands:
+      - run_huxley slack_notification_on_master send_final_workflow_status 

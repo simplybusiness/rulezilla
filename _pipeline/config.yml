@@ -1,0 +1,4 @@
+global:
+  SEMAPHORE_V2_PROJECT_ID: 'a4211f65-a22f-4e39-aec9-65c9d1040144'
+  APP_NAME: 'rulezilla'
+  APP_SLACK_DEPLOYMENT_CHANNEL: 'palm-trees-notifications'
