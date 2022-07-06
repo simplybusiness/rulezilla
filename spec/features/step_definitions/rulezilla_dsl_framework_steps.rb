@@ -85,10 +85,10 @@ step 'all the matching outcomes are :outcomes' do |outcomes|
   expect(@rule_klass.all(@record)).to match_array outcomes
 end
 
-step ':does_or_does_not raise the exception :exception' do |does_or_does_not, _exception|
+step ':does_or_does_not raise the exception :exception' do |does_or_does_not, exception_message|
   if does_or_does_not == 'does'
     expect { @rule_klass.apply @record }.to raise_error do |exception|
-      expect(exception.message).to match(/#{exception}/)
+      expect(exception.message).to match(/#{exception_message}/)
     end
   else
     expect { @rule_klass.apply @record }.not_to raise_error
