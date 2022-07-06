@@ -1,0 +1,46 @@
+name: Publish Ruby Gem
+
+on:
+  push:
+    branches: [ master ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build and Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Publish to RubyGems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
+      - name: Get Gem Version
+        id: get-gem-version
+        run: echo "::set-output name=GEM_VERSION::$(bundle exec ruby -e 'puts Rulezilla::VERSION')"
+      - name: Create Release
+        uses: actions/github-script@v6
+        env:
+          GEM_VERSION: ${{ steps.get-gem-version.outputs.GEM_VERSION }}
+        with:
+          result-encoding: string
+          script: |
+            const { GEM_VERSION } = process.env
+            github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: GEM_VERSION,
+              generate_release_notes: true,
+            })
