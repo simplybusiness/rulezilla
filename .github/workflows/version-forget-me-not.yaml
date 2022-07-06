@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - uses: simplybusiness/version-forget-me-not@V2.1.1
+      - uses: simplybusiness/version-forget-me-not@v2.3.0
         env:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION_FILE_PATH: "lib/rulezilla/version.rb"
