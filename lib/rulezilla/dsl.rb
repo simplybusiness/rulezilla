@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Rulezilla
   module DSL
     def self.included(base)
@@ -20,7 +22,11 @@ module Rulezilla
 
       klass.class_eval do
         include Rulezilla::BasicSupport
-        include Object.const_get("#{klass_name}Support") rescue NameError
+        begin
+          include Object.const_get("#{klass_name}Support")
+        rescue StandardError
+          NameError
+        end
 
         attr_reader :record
 
@@ -42,24 +48,24 @@ module Rulezilla
         @mandatory_attributes ||= []
       end
 
-      def apply(record={})
+      def apply(record = {})
         result_node = trace(record).last
 
         result_node.nil? ? nil : result_node.result(record_klass_instance(record))
       end
 
-      def all(record={})
+      def all(record = {})
         validate_missing_attributes(record)
         result_node = tree.find_all(record_klass_instance(record))
 
         result_node.nil? ? nil : result_node.map { |node| node.result(record_klass_instance(record)) }
       end
 
-      def results(record=nil)
+      def results(record = nil)
         tree.all_results(record_klass_instance(record)).uniq
       end
 
-      def trace(record=nil)
+      def trace(record = nil)
         validate_missing_attributes(record)
 
         tree.trace(record_klass_instance(record))
@@ -74,27 +80,29 @@ module Rulezilla
       end
 
       def tree
-        @tree ||= Tree.new(Node.new())
+        @tree ||= Tree.new(Node.new)
       end
 
       private
 
       def record_klass_instance(record)
-        Object.const_get("#{self.name}Record").new(record)
+        Object.const_get("#{name}Record").new(record)
       end
 
       def missing_attributes(record)
         record_attributes = if record.is_a?(Hash) || record.is_a?(OpenStruct)
-          record.to_h.keys.map(&:to_sym)
-        else
-          record.methods
-        end
+                              record.to_h.keys.map(&:to_sym)
+                            else
+                              record.methods
+                            end
 
         mandatory_attributes.map(&:to_sym) - record_attributes
       end
 
       def validate_missing_attributes(record)
-        raise "Missing #{missing_attributes(record).join(', ')} attributes from: #{record}" unless missing_attributes(record).empty?
+        unless missing_attributes(record).empty?
+          raise "Missing #{missing_attributes(record).join(', ')} attributes from: #{record}"
+        end
       end
 
       # DSL methods
@@ -102,22 +110,22 @@ module Rulezilla
         @mandatory_attributes = mandatory_attributes | fields
       end
 
-      def define(name=nil, &block)
+      def define(name = nil, &block)
         tree.create_and_move_to_child(name)
 
         instance_eval(&block)
         tree.go_up
       end
-      alias_method :group, :define
+      alias group define
 
       def condition(&block)
         tree.current_node.condition = block
       end
 
-      def result(value=nil, &block)
+      def result(value = nil, &block)
         tree.current_node.result = value.nil? ? block : value
       end
-      alias_method :default, :result
+      alias default result
 
       # End of DSL methods
     end
