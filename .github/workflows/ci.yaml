@@ -1,0 +1,37 @@
+name: Ruby CI
+
+on:
+  push:
+    branches:
+
+env:
+  CI: true
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+
+    strategy:
+      matrix:
+        ruby-version: [2.5, 2.6, 2.7, 3.0, jruby]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+
+    - name: Install dependencies
+      run: bundle install
+    - name: Rubocop Check
+      run: bundle exec rubocop
+    - name: Run all tests
+      run: bundle exec rspec
+      shell: bash
