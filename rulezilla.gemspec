@@ -2,8 +2,8 @@ $:.push File.expand_path("../lib", __FILE__)
 require 'rulezilla/version'
 
 Gem::Specification.new do |gem|
-  gem.authors       = ['Peter Wu']
-  gem.email         = ['peter.wu@simplybusiness.com']
+  gem.authors       = ['Simply Business']
+  gem.email         = ['tech@simplybusiness.co.uk']
   gem.description   = %q{Rules DSL}
   gem.summary       = %q{Rules DSL}
   gem.homepage      = %q{https://github.com/simplybusiness/rulezilla}
