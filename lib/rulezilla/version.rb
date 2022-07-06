@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Rulezilla
   base = '0.3.3'
 
