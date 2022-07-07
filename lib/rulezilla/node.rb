@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Rulezilla
   class Node
     attr_accessor :children,
@@ -21,6 +23,7 @@ module Rulezilla
 
     def applies?(record)
       return true if condition.nil?
+
       !!record.instance_eval(&condition)
     end
 

@@ -1,0 +1,29 @@
+
+name: "Dobby action"
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+jobs:
+  pr_commented:
+    runs-on: ubuntu-20.04
+    if: startsWith(github.event.comment.body, '/dobby')
+    env:
+      BUNDLE_WITHOUT: "development:test"
+    steps:
+      - name: Checkout action
+        uses: actions/checkout@v2
+        with:
+          repository: 'simplybusiness/dobby'
+          ref: 'v3.0.0'
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Bump version
+        uses: simplybusiness/dobby@v3.0.0
+        env:
+          DOBBY_APP_ID: ${{ secrets.DOBBY_APP_ID }}
+          DOBBY_PRIVATE_KEY: ${{ secrets.DOBBY_PRIVATE_KEY }}
+          VERSION_FILE_PATH: lib/rulezilla/version.rb

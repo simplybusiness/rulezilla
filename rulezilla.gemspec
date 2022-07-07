@@ -1,14 +1,17 @@
-$:.push File.expand_path("../lib", __FILE__)
+# frozen_string_literal: true
+
+require 'English'
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'rulezilla/version'
 
 Gem::Specification.new do |gem|
-  gem.authors       = ['Peter Wu']
-  gem.email         = ['peter.wu@simplybusiness.com']
-  gem.description   = %q{Rules DSL}
-  gem.summary       = %q{Rules DSL}
-  gem.homepage      = %q{https://github.com/simplybusiness/rulezilla}
+  gem.authors       = ['Simply Business']
+  gem.email         = ['tech@simplybusiness.co.uk']
+  gem.description   = 'Rules DSL'
+  gem.summary       = 'Rules DSL'
+  gem.homepage      = 'https://github.com/simplybusiness/rulezilla'
 
-  gem.files         = `git ls-files`.split($\)
+  gem.files         = `git ls-files`.split($OUTPUT_RECORD_SEPARATOR)
   gem.name          = 'rulezilla'
   gem.require_paths = ['lib']
   gem.version       = Rulezilla::VERSION
@@ -16,8 +19,9 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency('rspec')
   gem.add_development_dependency('pry')
-  gem.add_development_dependency('turnip')
   gem.add_development_dependency('pry-doc')
+  gem.add_development_dependency('rubocop')
+  gem.add_development_dependency('turnip')
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the
   # 'allowed_push_host' to allow pushing to a single host or delete this section

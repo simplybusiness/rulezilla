@@ -1,0 +1,19 @@
+name: Check version
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize]
+permissions:
+  contents: read
+  statuses: write
+jobs:
+  version-check:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: simplybusiness/version-forget-me-not@v2.3.0
+        env:
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION_FILE_PATH: "lib/rulezilla/version.rb"
