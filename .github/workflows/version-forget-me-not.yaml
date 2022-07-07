@@ -9,7 +9,7 @@ permissions:
   contents: read
   statuses: write
 jobs:
-  build:
+  version-check:
     runs-on: ubuntu-18.04
 
     steps:
