@@ -22,13 +22,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('pry-doc')
   gem.add_development_dependency('rubocop')
   gem.add_development_dependency('turnip')
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the
-  # 'allowed_push_host' to allow pushing to a single host or delete this section
-  # to allow pushing to any host.
-  if gem.respond_to?(:metadata)
-    gem.metadata['allowed_push_host'] = 'https://gemstash.simplybusiness.io/private'
-  else
-    raise 'RubyGems 2.2 or newer is required to protect against public gem pushes.'
-  end
 end
