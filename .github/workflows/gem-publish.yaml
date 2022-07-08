@@ -2,7 +2,7 @@ name: Publish Ruby Gem
 
 on:
   push:
-    branches: [ master ]
+#     branches: [ master ]
 
 permissions:
   contents: write
