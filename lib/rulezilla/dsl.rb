@@ -51,14 +51,14 @@ module Rulezilla
       def apply(record = {})
         result_node = trace(record).last
 
-        result_node.nil? ? nil : result_node.result(record_klass_instance(record))
+        result_node&.result(record_klass_instance(record))
       end
 
       def all(record = {})
         validate_missing_attributes(record)
         result_node = tree.find_all(record_klass_instance(record))
 
-        result_node.nil? ? nil : result_node.map { |node| node.result(record_klass_instance(record)) }
+        result_node&.map { |node| node.result(record_klass_instance(record)) }
       end
 
       def results(record = nil)
