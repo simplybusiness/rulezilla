@@ -2,7 +2,7 @@
 [![Code Climate](https://codeclimate.com/repos/53ecc0416956800c1d01f6bf/badges/76b47eaeffc33e312508/gpa.svg)](https://codeclimate.com/repos/53ecc0416956800c1d01f6bf/feed)
 [![Gem Version](https://badge.fury.io/rb/rulezilla.svg)](http://badge.fury.io/rb/rulezilla)
 
-rulezilla
+Testing Dobby
 =========
 
 This provides a DSL to implement rules for various tasks. In the current version we are still relying on user to have a certain level of Ruby knowledge
