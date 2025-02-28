@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.version       = Rulezilla::VERSION
   gem.license       = 'MIT'
 
+  gem.add_runtime_dependency('ostruct')
   gem.add_runtime_dependency('rspec')
   gem.add_development_dependency('pry')
   gem.add_development_dependency('pry-doc')

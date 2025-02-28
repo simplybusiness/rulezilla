@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'ostruct'
+
 module Rulezilla
   module DSL
     def self.included(base)
