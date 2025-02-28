@@ -3,13 +3,13 @@ name: Huxley TechDocs
 on:
   workflow_dispatch:
   push:
-    branches: master
+    branches: main
     paths:
       - "docs/**"
       - "mkdocs.yml"
       - ".github/workflows/publish-docs.yaml"
   pull_request:
-    branches: master
+    branches: main
     paths:
       - "docs/**"
       - "mkdocs.yaml"
