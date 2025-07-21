@@ -11,7 +11,7 @@ step 'the rule is:' do |rules|
 end
 
 step 'our rule is:' do |rules|
-  @rule_klass = Object.const_set('DummyRule', Class.new)
+  @rule_klass = Object.const_set(:DummyRule, Class.new)
   @rule_klass.class_eval('include Rulezilla::DSL', __FILE__, __LINE__)
   @rule_klass.class_eval(rules.to_s)
 end
