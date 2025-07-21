@@ -5,9 +5,26 @@ on:
     types: [created]
 permissions:
   contents: read
+
 jobs:
   pr_commented:
-    uses: simplybusiness/github-action-reusable-workflows/.github/workflows/dobby.yaml@v1
-    with:
-      version_file_path: ./lib/rulezilla/version.rb
-    secrets: inherit
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.comment.body, '/dobby')
+    env:
+      BUNDLE_WITHOUT: "development:test"
+    steps:
+      - name: Checkout action
+        uses: actions/checkout@v4
+        with:
+          repository: "simplybusiness/dobby"
+          ref: "v4"
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Bump version
+        uses: simplybusiness/dobby@v4
+        env:
+          DOBBY_APP_ID: ${{ secrets.DOBBY_APP_ID }}
+          DOBBY_PRIVATE_KEY: ${{ secrets.DOBBY_PRIVATE_KEY }}
+          VERSION_FILE_PATH: ./lib/rulezilla/version.rb
