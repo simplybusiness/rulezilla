@@ -34,7 +34,7 @@ module Rulezilla
 
         define_method(:initialize) do |record|
           record = OpenStruct.new(record) if record.is_a?(Hash)
-          instance_variable_set('@record', record)
+          instance_variable_set(:@record, record)
         end
 
         define_method(:method_missing) do |meth, *args, &block|
@@ -112,10 +112,10 @@ module Rulezilla
         @mandatory_attributes = mandatory_attributes | fields
       end
 
-      def define(name = nil, &block)
+      def define(name = nil, &)
         tree.create_and_move_to_child(name)
 
-        instance_eval(&block)
+        instance_eval(&)
         tree.go_up
       end
       alias group define

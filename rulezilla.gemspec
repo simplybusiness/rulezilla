@@ -16,11 +16,12 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.version       = Rulezilla::VERSION
   gem.license       = 'MIT'
+  gem.required_ruby_version = '>= 3.2.0'
 
-  gem.add_runtime_dependency('ostruct')
-  gem.add_runtime_dependency('rspec')
+  gem.add_dependency('ostruct')
   gem.add_development_dependency('pry')
   gem.add_development_dependency('pry-doc')
-  gem.add_development_dependency('rubocop')
+  gem.add_development_dependency('rspec')
+  gem.add_development_dependency('simplycop', '~> 2.23')
   gem.add_development_dependency('turnip')
 end
