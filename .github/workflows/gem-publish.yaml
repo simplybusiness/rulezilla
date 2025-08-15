@@ -31,7 +31,7 @@ jobs:
         id: get-gem-version
         run: echo "GEM_VERSION=$(bundle exec ruby -e 'puts Rulezilla::VERSION')" >> $GITHUB_OUTPUT
       - name: Create Release
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         env:
           GEM_VERSION: ${{ steps.get-gem-version.outputs.GEM_VERSION }}
         with:
