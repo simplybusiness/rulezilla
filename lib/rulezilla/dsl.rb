@@ -19,19 +19,28 @@ module Rulezilla
 
     def self.create_klass(parent_klass)
       klass_name = parent_klass.name
+      klass = create_record_class(parent_klass, klass_name)
+      setup_record_class(klass, klass_name)
+      klass
+    end
 
-      klass = get_super(parent_klass).const_set("#{demodulize_klass_name(klass_name)}Record", Class.new)
+    def self.create_record_class(parent_klass, klass_name)
+      get_super(parent_klass).const_set("#{demodulize_klass_name(klass_name)}Record", Class.new)
+    end
 
+    def self.setup_record_class(klass, klass_name)
       klass.class_eval do
         include Rulezilla::BasicSupport
-        begin
-          include Object.const_get("#{klass_name}Support")
-        rescue StandardError
-          NameError
-        end
+        include Object.const_get("#{klass_name}Support") if Object.const_defined?("#{klass_name}Support")
 
         attr_reader :record
+      end
 
+      define_record_methods(klass)
+    end
+
+    def self.define_record_methods(klass)
+      klass.class_eval do
         define_method(:initialize) do |record|
           record = OpenStruct.new(record) if record.is_a?(Hash)
           instance_variable_set(:@record, record)
@@ -41,9 +50,10 @@ module Rulezilla
           record.send(meth, *args, &block)
         end
       end
-
-      private_class_method :create_klass, :get_super, :demodulize_klass_name
     end
+
+    private_class_method :create_klass, :get_super, :demodulize_klass_name, :create_record_class,
+                         :setup_record_class, :define_record_methods
 
     module ClassMethods
       def mandatory_attributes
