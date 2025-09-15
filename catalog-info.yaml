@@ -5,7 +5,7 @@ metadata:
   description:  Rule DSL
   annotations:
     rubygems.org/name: rulezilla
-    rubygems.org/current-version: '0.4.15'
+    rubygems.org/current-version: '0.4.16'
 spec:
   type: library
   lifecycle: production
