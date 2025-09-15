@@ -4,7 +4,8 @@ metadata:
   name: rulezilla
   description:  Rule DSL
   annotations:
-    backstage.io/techdocs-ref: dir:. 
+    rubygems.org/name: rulezilla
+    rubygems.org/current-version: '0.4.16'
 spec:
   type: library
   lifecycle: production

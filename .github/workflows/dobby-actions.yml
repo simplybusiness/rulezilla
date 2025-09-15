@@ -28,3 +28,4 @@ jobs:
           DOBBY_APP_ID: ${{ secrets.DOBBY_APP_ID }}
           DOBBY_PRIVATE_KEY: ${{ secrets.DOBBY_PRIVATE_KEY }}
           VERSION_FILE_PATH: ./lib/rulezilla/version.rb
+          OTHER_VERSION_FILE_PATHS: catalog-info.yaml
